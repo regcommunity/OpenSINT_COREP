@@ -160,6 +160,7 @@ class Other_loans(F_05_01_REF_FINREP_3_0_Base):
 	@lineage(dependencies={"INSTRMNT_RL.SPCLSD_LNDNG_EXPSR_TYP"})
 	def SPCLSD_LNDNG_EXPSR_TYP(self):
 		return self.INSTRMNT_RL.SPCLSD_LNDNG_EXPSR_TYP
+	ENTTY_RL = None # ENTTY_RL
 
 class Credit_card_debt(F_05_01_REF_FINREP_3_0_Base):
 	INSTRMNT = None # INSTRMNT
@@ -520,6 +521,7 @@ class F_05_01_REF_FINREP_3_0_Other_loans_Table:
 	INSTRMNT_ENTTY_RL_ASSGNMNT_Table = None # INSTRMNT_ENTTY_RL_ASSGNMNT
 	INSTRMNT_RL_Table = None # INSTRMNT_RL
 	PRTY_Table = None # PRTY
+	ENTTY_RL_Table = None # ENTTY_RL
 	Other_loanss = []# Other_loans[]	
 	@lineage(dependencies={"INSTRMNT.INSTRMNT_TYP_PRDCT",
 		"INSTRMNT_ENTTY_RL_ASSGNMNT.theINSTRMNT",
@@ -556,6 +558,7 @@ class F_05_01_REF_FINREP_3_0_Other_loans_Table:
 					if (inst == newItem.INSTRMNT):
 						newItem.INSTRMNT_ENTTY_RL_ASSGNMNT = era
 						er = era.theENTTY_RL
+						newItem.ENTTY_RL = er
 						newItem.PRTY = er.thePRTY
 					
 				items.append(newItem)
