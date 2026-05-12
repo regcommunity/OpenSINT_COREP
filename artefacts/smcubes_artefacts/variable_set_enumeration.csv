@@ -1,1 +1,3 @@
-ID,VARIABLE_SET_ID,VARIABLE_ID,VALID_FROM,VALID_TO,SUBDOMAIN_ID,IS_FLOW,ORDER
+version https://git-lfs.github.com/spec/v1
+oid sha256:280c72ebfffcb2c8dbb5be51c57db43ef4f25d91d639c5dc4ac97dfe298cbcee
+size 77
