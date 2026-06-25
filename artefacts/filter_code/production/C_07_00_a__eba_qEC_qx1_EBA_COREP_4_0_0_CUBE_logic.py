@@ -409,23 +409,14 @@ class Credit_or_Counterparty_Risk_Exposure_Data(C_07_00_a__eba_qEC_qx1_EBA_COREP
 	def EXPOSURE_VALUE(self):
 		return self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.EXPOSURE_VALUE
 
-
 class C_07_00_a__eba_qEC_qx1_EBA_COREP_4_0_0_CUBE_Credit_or_Counterparty_Risk_Exposure_Data_Table:
 	CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT_Table = None # CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT
-	LNG_BLNC_SHT_RCGNSD_DBT_SCRTY_PSTN_PRDNTL_PRTFL_ACCNTNG_CLSSFCTN_ASSGNMNT_DRVD_DT_Table = None # LNG_BLNC_SHT_RCGNSD_DBT_SCRTY_PSTN_PRDNTL_PRTFL_ACCNTNG_CLSSFCTN_ASSGNMNT_DRVD_DT
-	LNG_BLNC_SHT_RCGNSD_SCRTY_PSTN_PRDNTL_PRTFL_ACCNTNG_CLSSFCTN_ASSGNMNT_Table = None # LNG_BLNC_SHT_RCGNSD_SCRTY_PSTN_PRDNTL_PRTFL_ACCNTNG_CLSSFCTN_ASSGNMNT
-	INSTRMNT_Table = None # INSTRMNT
 	Credit_or_Counterparty_Risk_Exposure_Datas = []# Credit_or_Counterparty_Risk_Exposure_Data[]
 	def calc_Credit_or_Counterparty_Risk_Exposure_Datas(self) :
 		items = [] # Credit_or_Counterparty_Risk_Exposure_Data[
 		# Join up any refered tables that you need to join
 		# loop through the main table
 		# set any references you want to on the new Item so that it can refer to themin operations
-		for item in self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT_Table:
-			newItem = Credit_or_Counterparty_Risk_Exposure_Data()
-			newItem.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT = item
-			newItem.base = item
-			items.append(newItem)
 		return items
 	def init(self):
 		Orchestration().init(self)
@@ -433,3 +424,4 @@ class C_07_00_a__eba_qEC_qx1_EBA_COREP_4_0_0_CUBE_Credit_or_Counterparty_Risk_Ex
 		self.Credit_or_Counterparty_Risk_Exposure_Datas.extend(self.calc_Credit_or_Counterparty_Risk_Exposure_Datas())
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
+
