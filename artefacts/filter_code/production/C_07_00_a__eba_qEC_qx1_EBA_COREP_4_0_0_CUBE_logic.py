@@ -339,6 +339,9 @@ class Credit_or_Counterparty_Risk_Exposure_Data(C_07_00_a__eba_qEC_qx1_EBA_COREP
 	@lineage(dependencies={"CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.CALCULATION_METHOD"})
 	def CALCULATION_METHOD(self):
 		return self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.CALCULATION_METHOD
+	def CLLTRL_RL_TYP(self):
+		''' defaulty to 1 for now as we did not add it to the SQLDEveloper logic yet '''
+		return '1'
 	@lineage(dependencies={"CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.CONVERSION_FACTORS_FOR_OFF_BALANCE_SHEET_ITEMS"})
 	def CONVERSION_FACTORS_FOR_OFF_BALANCE_SHEET_ITEMS(self):
 		return self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.CONVERSION_FACTORS_FOR_OFF_BALANCE_SHEET_ITEMS
@@ -408,6 +411,9 @@ class Credit_or_Counterparty_Risk_Exposure_Data(C_07_00_a__eba_qEC_qx1_EBA_COREP
 	@lineage(dependencies={"CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.EXPOSURE_VALUE"})
 	def EXPOSURE_VALUE(self):
 		return self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.EXPOSURE_VALUE
+	@lineage(dependencies={"CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.ORIGINAL_EXPOSURE_PRE_CONVERSION_FACTORS"})
+	def ORIGINAL_EXPOSURE_PRE_CONVERSION_FACTORS(self):
+		return self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT.ORIGINAL_EXPOSURE_PRE_CONVERSION_FACTORS
 
 class C_07_00_a__eba_qEC_qx1_EBA_COREP_4_0_0_CUBE_Credit_or_Counterparty_Risk_Exposure_Data_Table:
 	CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT_Table = None # CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT
@@ -417,6 +423,11 @@ class C_07_00_a__eba_qEC_qx1_EBA_COREP_4_0_0_CUBE_Credit_or_Counterparty_Risk_Ex
 		# Join up any refered tables that you need to join
 		# loop through the main table
 		# set any references you want to on the new Item so that it can refer to themin operations
+		for item in self.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT_Table:
+			newItem = Credit_or_Counterparty_Risk_Exposure_Data()
+			newItem.CNTRPRTY_OR_ISSR_EXPSR_RSK_EXPSR_DT = item
+			newItem.base = item
+			items.append(newItem)
 		return items
 	def init(self):
 		Orchestration().init(self)
@@ -424,4 +435,3 @@ class C_07_00_a__eba_qEC_qx1_EBA_COREP_4_0_0_CUBE_Credit_or_Counterparty_Risk_Ex
 		self.Credit_or_Counterparty_Risk_Exposure_Datas.extend(self.calc_Credit_or_Counterparty_Risk_Exposure_Datas())
 		CSVConverter.persist_object_as_csv(self,True)
 		return None
-
